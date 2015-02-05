@@ -4,6 +4,7 @@
 #
 #-------------------------------------------------
 CONFIG +=  c++11
+QMAKE_CXXFLAGS += -std=c++11
 
 QT       += core gui opengl
 
