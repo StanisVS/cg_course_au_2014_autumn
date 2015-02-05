@@ -17,7 +17,7 @@ GLWidget::GLWidget(QWidget *parent) :
     yzModelAngle(0),
     multiplier(1.0),
     lightDir(1,0,0),
-    lightColor(93.0f,67.0f,67.0f),
+    lightColor(1,1,1),
     ambient(0.1f,0.1f,0.1f),
     specularColor(1.0,1.0,1.0),
     lightPow(1.0),
@@ -30,10 +30,10 @@ GLWidget::GLWidget(QWidget *parent) :
 
 void GLWidget::initializeGL()
 {
+    setLightXangle(0);
+    setLightYangle(180);
     loadModel("quad.obj");
-
     initializeGLFunctions();
-
     glDisable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
 
