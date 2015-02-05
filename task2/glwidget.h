@@ -35,31 +35,20 @@ protected slots:
     void setMultiplier(double multiplier);
 
 public slots:
-    void setLightColor(QColor color){
-       cout<<"light setted \n"<<color.red();
-    }
-    void setAmbient (QColor color){
-       cout<<"ambient setted \n"<<color.red();
-    }
-    void setSpecularColor (QColor color){
-        cout<<"spec setted \n"<<color.red();
-    }
+    void setLightColor(QColor color);
+    void setAmbient (QColor color);
+    void setSpecularColor (QColor color);
 
-    void setLightXangle (int x){
-        cout<<x;
-    }
-    void setLightYangle (int y){
-        cout<<y;
-    }
+    void setLightXangle (int x);
+    void setLightYangle (int y);
 
-    void setLightPower(double power){
-       cout<<power;
-    }
-    void setSpecularPower(double power){
-       cout<<power;
-    }
+    void setLightPower(double power);
+    void setSpecularPower(double power);
 
 private:
+    QMatrix4x4 singleMat;
+    float phi = 0.0;
+    float theta = 0.0;
     struct Face {
         int vtx_idx[3];
         int uv_idx[3];

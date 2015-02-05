@@ -16,7 +16,7 @@ in vec3 LightDirection;
 out vec3 color;
 
 void main(void) {
-//    color = texture2D(texture, UV);
+//    color = texture2D(texture, UV).xyz;
     vec3 texture_color = texture2D(texture, UV).rgb;
 
     vec3 ambient_part = ambient * texture_color;

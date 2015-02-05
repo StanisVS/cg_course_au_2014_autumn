@@ -5,6 +5,11 @@
 #include <math.h>
 #include <iostream>
 
+#define PI 3.14159265
+
+using std::sin;
+using std::cos;
+
 GLWidget::GLWidget(QWidget *parent) :
     QGLWidget(parent),
     shader(new QGLShaderProgram()),
@@ -12,7 +17,7 @@ GLWidget::GLWidget(QWidget *parent) :
     yzModelAngle(0),
     multiplier(1.0),
     lightDir(1,0,0),
-    lightColor(0,0,0),
+    lightColor(93.0f,67.0f,67.0f),
     ambient(0.1f,0.1f,0.1f),
     specularColor(1.0,1.0,1.0),
     lightPow(1.0),
@@ -191,6 +196,61 @@ void GLWidget::setMultiplier(double multiplier)
     updateGL();
 }
 
+void GLWidget::setLightColor(QColor color)
+{
+    lightColor.setX(color.redF());
+    lightColor.setY(color.greenF());
+    lightColor.setZ(color.blueF());
+    updateGL();
+}
+
+void GLWidget::setAmbient(QColor color)
+{
+    ambient.setX(color.hslHueF());
+    ambient.setY(color.hslSaturationF());
+    ambient.setZ(color.lightnessF());
+    updateGL();
+}
+
+void GLWidget::setSpecularColor(QColor color)
+{
+    specularColor.setX(color.redF());
+    specularColor.setY(color.greenF());
+    specularColor.setZ(color.blueF());
+    updateGL();
+}
+
+void GLWidget::setLightXangle(int x)
+{
+    phi = (float)(x*PI/180);
+    lightDir.setX(sin(theta)*cos(phi));
+    lightDir.setY(sin(theta)*sin(phi));
+    lightDir.setZ(cos(theta));
+    lightDir = lightDir.normalized();
+    updateGL();
+}
+
+void GLWidget::setLightYangle(int y)
+{
+    theta =(float)(y*PI/180);
+    lightDir.setX(sin(theta)*cos(phi));
+    lightDir.setY(sin(theta)*sin(phi));
+    lightDir.setZ(cos(theta));
+    lightDir = lightDir.normalized();
+    updateGL();
+}
+
+void GLWidget::setLightPower(double power)
+{
+       lightPow = (float) power;
+       updateGL();
+}
+
+void GLWidget::setSpecularPower(double power)
+{
+    specPow = (float) power;
+    updateGL();
+}
 void GLWidget::computeTangentBasis()
 {
     for (unsigned int i = 0; i < triangles.size(); i += 3 ) {
