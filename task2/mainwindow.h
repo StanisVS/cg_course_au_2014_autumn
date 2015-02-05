@@ -15,6 +15,14 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     
+private slots:
+
+    void on_lightCPicker_clicked();
+
+    void on_ambientCPicker_clicked();
+
+    void on_specularCPicker_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
